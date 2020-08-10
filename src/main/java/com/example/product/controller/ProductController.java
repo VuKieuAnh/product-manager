@@ -23,10 +23,28 @@ public class ProductController {
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK) ;
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
         productService.save(product);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> editProduct(@PathVariable Long id, @RequestBody Product product){
+        product.setId(id);
+        productService.save(product);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable Long id){
+        productService.remove(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> detailProduct(@PathVariable Long id){
+        return new ResponseEntity<>(productService.findById(id).get(), HttpStatus.OK);
     }
 
 }
