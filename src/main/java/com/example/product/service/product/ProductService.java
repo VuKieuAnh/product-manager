@@ -1,10 +1,12 @@
 package com.example.product.service.product;
 
+import com.example.product.model.Category;
 import com.example.product.model.Product;
 import com.example.product.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 @Service
@@ -30,5 +32,10 @@ public class ProductService implements IProductService {
     @Override
     public void remove(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Product> findAllByCategory(Category category) {
+        return productRepository.findAllByCategory(category);
     }
 }

@@ -25,8 +25,7 @@ public class ProductController {
 
     @PostMapping()
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
-        productService.save(product);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(productService.save(product), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
@@ -46,5 +45,7 @@ public class ProductController {
     public ResponseEntity<Product> detailProduct(@PathVariable Long id){
         return new ResponseEntity<>(productService.findById(id).get(), HttpStatus.OK);
     }
+
+
 
 }
